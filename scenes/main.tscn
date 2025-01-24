@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://78n4a175g7ui"]
+[gd_scene load_steps=4 format=3 uid="uid://78n4a175g7ui"]
 
 [ext_resource type="PackedScene" uid="uid://dg6f078aut376" path="res://scenes/player.tscn" id="1_qhroj"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="2_pstin"]
+
+[sub_resource type="Curve2D" id="Curve2D_1k70t"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -1, 7, -135.417, -188.871, 135.417, 188.871, 997, 165, 301.124, -272.615, -301.124, 272.615, 1153, 723, 222.725, 114.035, -222.725, -114.035, -131, 946)
+}
+point_count = 4
 
 [node name="Node2D" type="Node2D"]
 
@@ -13,5 +19,16 @@ player_index = -1
 position = Vector2(212, 8)
 player_index = 1
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="CameraPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_1k70t")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="CameraPath"]
+position = Vector2(-1, 7)
+rotation = 0.157013
+
+[node name="Camera2D" type="Camera2D" parent="CameraPath/PathFollow2D"]
+position = Vector2(-65.3913, -46.5723)
+rotation = -0.263564
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 script = ExtResource("2_pstin")
