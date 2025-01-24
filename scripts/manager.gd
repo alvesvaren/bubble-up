@@ -18,8 +18,12 @@ func _process(delta: float) -> void:
 			for joypad in Input.get_connected_joypads():
 				if Input.is_joy_button_pressed(joypad, JOY_BUTTON_A) and joypad not in players:
 					join_player(joypad)
+				if Input.is_joy_button_pressed(joypad, JOY_BUTTON_START) and joypad in players:
+					state = DURING
 			if Input.is_action_just_pressed("kb_p1_left") and -1 not in players:
 				join_player(-1)
+			if Input.is_action_just_pressed("start") and -1 in players:
+				state = DURING
 		DURING:
 			pass
 		AFTER:

@@ -12,7 +12,7 @@ func _process(delta: float) -> void:
 		var avarage_pos = Vector2(0,0)
 		var count = 0
 		var progress = {}
-		for child in get_parent().get_parent().get_parent().get_children():
+		for child in get_tree().root.get_children():
 			if child.name.find("Player") != -1:
 				progress[child.name] = get_parent().get_parent().curve.get_closest_offset(child.global_position)
 				avarage_pos += child.global_position
