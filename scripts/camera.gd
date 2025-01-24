@@ -17,7 +17,7 @@ func _process(delta: float) -> void:
 				progress[child.name] = get_parent().get_parent().curve.get_closest_offset(child.global_position)
 				avarage_pos += child.global_position
 				count += 1
-				
+		global_rotation = 0
 		get_parent().progress = progress[first_player(progress)]
 
 func first_player(progress) -> String:

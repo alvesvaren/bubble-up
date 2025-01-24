@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://78n4a175g7ui"]
+[gd_scene load_steps=9 format=3 uid="uid://78n4a175g7ui"]
 
 [ext_resource type="Script" path="res://scripts/camera.gd" id="2_pstin"]
+[ext_resource type="Shader" path="res://shaders/watershader.gdshader" id="3_xmvvh"]
+[ext_resource type="Texture2D" uid="uid://8cuimg10rxe1" path="res://shaders/caustics.webp" id="4_ninpr"]
 
 [sub_resource type="Curve2D" id="Curve2D_1k70t"]
 _data = {
@@ -8,18 +10,37 @@ _data = {
 }
 point_count = 4
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dhcs2"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_x5ka6"]
+noise = SubResource("FastNoiseLite_dhcs2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4j02e"]
+shader = ExtResource("3_xmvvh")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/speed = Vector2(0.03, 0.04)
+shader_parameter/wave_strength = 1.0
+shader_parameter/fast_noise = SubResource("NoiseTexture2D_x5ka6")
+shader_parameter/caustics = ExtResource("4_ninpr")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0ow3f"]
+
 [node name="Node2D" type="Node2D"]
 
 [node name="CameraPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_1k70t")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="CameraPath"]
-position = Vector2(-1, 7)
-rotation = 0.157013
 
 [node name="Camera2D" type="Camera2D" parent="CameraPath/PathFollow2D"]
 position = Vector2(-65.3913, -46.5723)
-rotation = -0.263564
+ignore_rotation = false
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("2_pstin")
+
+[node name="shader" type="Sprite2D" parent="CameraPath/PathFollow2D/Camera2D"]
+material = SubResource("ShaderMaterial_4j02e")
+position = Vector2(-7.80434, -4.96385)
+scale = Vector2(443.609, 259.072)
+texture = SubResource("PlaceholderTexture2D_0ow3f")
