@@ -45,7 +45,7 @@ func flap(axis: float):
 	
 	var flap_multiplier = flap_curve.sample(difference)
 	
-	print("difference: ", difference, "s", " duration: ", current_time - last_flap_time, "s")
+	#print("difference: ", difference, "s", " duration: ", current_time - last_flap_time, "s")
 	
 	last_flap_time = current_time
 	last_flap_was_right = current_flap_right
