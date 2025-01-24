@@ -26,11 +26,14 @@ shader_parameter/caustics = ExtResource("4_ninpr")
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0ow3f"]
 
 [node name="Node2D" type="Node2D"]
+position = Vector2(151, 81)
 
 [node name="CameraPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_1k70t")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="CameraPath"]
+position = Vector2(-1, 7)
+rotates = false
 
 [node name="Camera2D" type="Camera2D" parent="CameraPath/PathFollow2D"]
 position = Vector2(-65.3913, -46.5723)

@@ -19,13 +19,13 @@ void fragment() {
 	// Called for every pixel the material is visible on.
 	vec2 uv = vec2(floor(UV.x / pixel_size.x) * pixel_size.x, floor(UV.y / pixel_size.y) * pixel_size.y) + speed * TIME;
 	vec2 noise = texture(fast_noise, uv).rg;
-	
-	vec4 caus = texture(caustics, uv + noise * (wave_strength / 100.0)).rgba;
-	
 
-	
+	vec4 caus = texture(caustics, uv + noise * (wave_strength / 100.0)).rgba;
+
+
+
 	COLOR = vec4(color.r, color.g, color.b, 1) + caus;
-	
+
 	COLOR *= texture(screen_content, SCREEN_UV + noise * (wave_strength / 100.0));
-	
+
 }
