@@ -30,7 +30,6 @@ func _process(delta: float) -> void:
 		var first_edge_dist = distance_to_edge(%players.get_node(first).global_position)
 		$"..".progress += delta * max(0.1, FIRST_PLAYER_FOLLOW_SPEED - first_edge_dist / 200) * (progress[first_player(progress)] - $"..".progress)
 		if first_edge_dist < FIRST_PLAYER_MIN_DIST:
-			print("I am speed!!!")
 			$"..".progress += FIRST_PLAYER_OUTSIDE_SPEEDUP * delta * max(0.1, FIRST_PLAYER_FOLLOW_SPEED - first_edge_dist / 200) * (progress[first_player(progress)] - $"..".progress)
 		$shader.global_position = get_screen_center_position()
 		$shader.material.set_shader_parameter("offset", get_screen_center_position() * CAUSTIC_OFFSET_SCALE)
