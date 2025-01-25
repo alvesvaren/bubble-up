@@ -6,6 +6,7 @@ const SPEED = 200.0
 const DRAG = 0.004
 const STEER_FACTOR = 0.001
 
+const hue_offsets = [0.0, 0.25, 0.5, 0.75]
 @export var player_index: int
 @export var flap_curve: Curve
 
@@ -61,7 +62,11 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+func _ready():
+	pass
+
 func _process(delta: float) -> void:
+	
 	var current = get_flap_axis()
 	
 	var angle_difference = rotation - velocity.angle()
@@ -74,5 +79,5 @@ func _process(delta: float) -> void:
 	rotate(angular * delta * 10)
 	
 	$fish1.flip_v = Vector2.from_angle(global_rotation).x < 0
-	
+	$fish1.material.set_shader_parameter("hue_shift", hue_offsets[player_index % len(hue_offsets)])
 	flap(current)
