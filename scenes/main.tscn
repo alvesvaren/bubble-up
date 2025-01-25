@@ -1,12 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://78n4a175g7ui"]
+[gd_scene load_steps=17 format=3 uid="uid://78n4a175g7ui"]
 
 [ext_resource type="Script" path="res://scripts/camera.gd" id="2_pstin"]
 [ext_resource type="Shader" path="res://shaders/watershader.gdshader" id="3_xmvvh"]
 [ext_resource type="Script" path="res://scripts/players.gd" id="4_126x0"]
 [ext_resource type="PackedScene" uid="uid://dr5lyvg3o4q2c" path="res://scenes/wall.tscn" id="6_b32pa"]
 [ext_resource type="AudioStream" uid="uid://p58qqckoeg35" path="res://sounds/menu_loop.ogg" id="6_wx3br"]
-[ext_resource type="PackedScene" path="res://scenes/map.tscn" id="7_6wj1g"]
+[ext_resource type="PackedScene" uid="uid://byrgrghalrumv" path="res://scenes/map.tscn" id="7_6wj1g"]
 [ext_resource type="PackedScene" uid="uid://bxaymoc7xg1is" path="res://scenes/bubble.tscn" id="7_77b3q"]
+[ext_resource type="PackedScene" uid="uid://c567aloh2qp8u" path="res://scenes/goal.tscn" id="8_mfe0w"]
 
 [sub_resource type="Curve2D" id="Curve2D_1k70t"]
 _data = {
@@ -93,3 +94,6 @@ texture = SubResource("PlaceholderTexture2D_0ow3f")
 
 [node name="Bubble" parent="." instance=ExtResource("7_77b3q")]
 position = Vector2(393, 0)
+
+[node name="Goal" parent="." instance=ExtResource("8_mfe0w")]
+position = Vector2(-332, 1026)
