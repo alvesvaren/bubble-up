@@ -17,10 +17,12 @@ var last_flap_time = 0
 
 var angular = 0
 var caught = false
-var bubble = false
-var shield = false
 
 signal death
+signal collect_bu
+
+var collected_bu = null
+var shield_active = false
 
 func stun(duration: float, pos: Vector2):
 	speed_multiplier = 0
@@ -34,9 +36,20 @@ func stun(duration: float, pos: Vector2):
 
 func _ready() -> void:
 	death.connect(on_death)
+	collect_bu.connect(on_bu)
 
 func on_death() -> void:
 	queue_free()
+	
+func on_bu(bu: BubbleUp.BU) -> void:
+	collected_bu = bu
+	match bu:
+		BubbleUp.BU.SPEED:
+			pass
+		BubbleUp.BU.BUBBLE:
+			pass
+		BubbleUp.BU.SHIELD:
+			pass
 
 func get_flap_axis():
 	if player_index == -1:
@@ -80,27 +93,32 @@ func flap(axis: float):
 func _physics_process(delta: float) -> void:
 	if not caught:
 		velocity -= velocity.normalized() * (velocity.length() * velocity.length()) * DRAG * delta
-		move_and_slide()
 
 	var collision = move_and_collide(velocity * delta, 0.08, true)
 	if collision:
 		var layers = PhysicsServer2D.body_get_collision_layer(collision.get_collider_rid())
 		if layers & (1 << 3):
-			velocity = velocity.bounce(collision.get_normal()) * 2
+			velocity = (velocity.bounce(collision.get_normal())) * 2 + (velocity.bounce(collision.get_normal()).normalized() * 50)
+	move_and_slide()
+
 
 
 
 func _process(delta: float) -> void:
-	$bubble.visible = bubble
-	$shield.visible = shield
+	$bubble.visible = collected_bu == BubbleUp.BU.BUBBLE
+	$shield.visible = shield_active
 	
-	if bubble:
-		if (player_index == -1 and Input.is_action_just_pressed("kb_p1_use")) or (player_index != -1 and Input.is_joy_button_pressed(player_index, JOY_BUTTON_RIGHT_SHOULDER)):
-			bubble = false
-			var new_bubble = bubble_scene.instantiate()
-			new_bubble.global_position = $bubble.global_position
-			get_parent().get_parent().get_node("map/bubbles").add_child(new_bubble)
-			
+	if collected_bu and (player_index == -1 and Input.is_action_just_pressed("kb_p1_use")) or (player_index != -1 and Input.is_joy_button_pressed(player_index, JOY_BUTTON_RIGHT_SHOULDER)):
+		match collected_bu:
+			BubbleUp.BU.BUBBLE:
+				var new_bubble = bubble_scene.instantiate()
+				new_bubble.global_position = $bubble.global_position
+				get_parent().get_parent().get_node("map/bubbles").add_child(new_bubble)
+			BubbleUp.BU.SPEED:
+				velocity += Vector2.from_angle(rotation) * 1000
+			BubbleUp.BU.SHIELD:
+				start_shield()
+		collected_bu = null
 	var current = get_flap_axis()
 	
 	var angle_difference = rotation - velocity.angle()
@@ -121,8 +139,10 @@ func _process(delta: float) -> void:
 
 func start_shield() -> void:
 	$ShieldTimer.start()
-	shield = true
+	speed_multiplier = 1.2
+	shield_active = true
 
 
 func _on_shield_timer_timeout() -> void:
-	shield = false
+	shield_active = false
+	speed_multiplier = 1.0

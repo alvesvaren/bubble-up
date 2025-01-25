@@ -7,7 +7,7 @@ var vel = 0;
 const FLOAT_ACC = -100;
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is Player and active and active and not body.shield:
+	if body is Player and active and active and not body.shield_active:
 		active = false
 		body.caught = true
 		player = body

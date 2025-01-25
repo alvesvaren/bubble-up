@@ -49,6 +49,7 @@ position_smoothing_speed = 100.0
 script = ExtResource("1_ouyua")
 
 [node name="shader" type="Sprite2D" parent="."]
+z_index = 100
 material = SubResource("ShaderMaterial_v632f")
 position = Vector2(-6.6087, 0.572299)
 scale = Vector2(853, 495)
