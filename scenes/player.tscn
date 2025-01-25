@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://dg6f078aut376"]
+[gd_scene load_steps=15 format=4 uid="uid://dg6f078aut376"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_yq23o"]
 [ext_resource type="Material" uid="uid://bojfk8j2wh66i" path="res://shaders/player.tres" id="2_i1wvi"]
@@ -53,12 +53,15 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_80gl1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a6adv"]
 resource_local_to_scene = true
 shader = ExtResource("4_cqnsm")
 shader_parameter/hue_shift = 0.605
 shader_parameter/sat_mul = 1.0
 shader_parameter/val_mul = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rcwjr"]
+radius = 11.0454
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 2
@@ -81,8 +84,17 @@ flip_h = true
 
 [node name="2" parent="sprites" instance=ExtResource("3_7kr7p")]
 visible = false
-material = SubResource("ShaderMaterial_80gl1")
+material = SubResource("ShaderMaterial_a6adv")
 flip_h = true
 
 [node name="timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="bounce" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="collider" type="CollisionShape2D" parent="bounce"]
+shape = SubResource("CircleShape2D_rcwjr")
+
+[connection signal="body_shape_entered" from="bounce" to="." method="_on_bounce_body_shape_entered"]

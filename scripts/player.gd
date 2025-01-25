@@ -77,8 +77,15 @@ func _physics_process(delta: float) -> void:
 	velocity -= velocity.normalized() * (velocity.length() * velocity.length()) * DRAG * delta
 
 	# Move force from "forwards" to "facing"
-
 	move_and_slide()
+
+	var collision = move_and_collide(velocity * delta, 0.08, true)
+	if collision:
+		var layers = PhysicsServer2D.body_get_collision_layer(collision.get_collider_rid())
+		if layers & (1 << 3):
+			velocity = velocity.bounce(collision.get_normal()) * 2
+
+
 
 func _process(delta: float) -> void:
 	
