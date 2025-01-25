@@ -39,16 +39,16 @@ func on_death() -> void:
 	queue_free()
 
 func get_flap_axis():
-	if player_index == -1:
+	if player_index < 0:
 		# keyboard
-		return Input.get_axis("kb_p1_flap_left", "kb_p1_flap_right")
+		return Input.get_axis("kb_p" + str(- player_index) + "_flap_left", "kb_p" + str(- player_index) + "_flap_right")
 	
 	return Input.get_joy_axis(player_index, JOY_AXIS_RIGHT_X)
 
 func get_dir():
-	if player_index == -1:
+	if player_index < 0:
 		# keyboard
-		return Vector2(Input.get_axis("kb_p1_left", "kb_p1_right"), Input.get_axis("kb_p1_up", "kb_p1_down"))
+		return Vector2(Input.get_axis("kb_p" + str(- player_index) + "_left", "kb_p" + str(- player_index) + "_right"), Input.get_axis("kb_p" + str(- player_index) + "_up", "kb_p" + str(- player_index) + "_down"))
 	
 	return Vector2(Input.get_joy_axis(player_index, JOY_AXIS_LEFT_X), Input.get_joy_axis(player_index, JOY_AXIS_LEFT_Y))
 
@@ -95,7 +95,7 @@ func _process(delta: float) -> void:
 	$shield.visible = shield
 	
 	if bubble:
-		if (player_index == -1 and Input.is_action_just_pressed("kb_p1_use")) or (player_index != -1 and Input.is_joy_button_pressed(player_index, JOY_BUTTON_RIGHT_SHOULDER)):
+		if (player_index < 0 and Input.is_action_just_pressed("kb_p" + str(- player_index) + "_use")) or (player_index >= 0 and Input.is_joy_button_pressed(player_index, JOY_BUTTON_RIGHT_SHOULDER)):
 			bubble = false
 			var new_bubble = bubble_scene.instantiate()
 			new_bubble.global_position = $bubble.global_position
