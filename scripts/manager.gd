@@ -32,8 +32,8 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	match state:
 		BEFORE:
-			process_before.emit()
+			process_before.emit(delta)
 		DURING:
-			process_during.emit()
+			process_during.emit(delta)
 		AFTER:
-			process_after.emit()
+			process_after.emit(delta)

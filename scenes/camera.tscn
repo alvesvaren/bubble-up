@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bitpbokq1j4qs"]
+[gd_scene load_steps=10 format=3 uid="uid://dxv8kn10275wu"]
 
 [ext_resource type="Script" path="res://scripts/camera.gd" id="1_ouyua"]
 [ext_resource type="Shader" path="res://shaders/watershader.gdshader" id="2_qcvmp"]
@@ -33,7 +33,7 @@ noise = SubResource("FastNoiseLite_eg2xl")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v632f"]
 shader = ExtResource("2_qcvmp")
-shader_parameter/color = Color(0.445732, 0.596509, 0.689985, 1)
+shader_parameter/color = Color(0.846194, 0.90061, 0.935827, 1)
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/speed = Vector2(0.03, 0.04)
 shader_parameter/wave_strength = 1.0

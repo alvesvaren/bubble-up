@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bojfk8j2wh66i"]
+
+[ext_resource type="Shader" path="res://shaders/hsv-shader.gdshader" id="1_wiak8"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_wiak8")
+shader_parameter/hue_shift = 0.605
+shader_parameter/sat_mul = 1.0
+shader_parameter/val_mul = 1.0

@@ -1,21 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxaymoc7xg1is"]
+[gd_scene load_steps=4 format=3 uid="uid://d1jvxhgsevlub"]
 
 [ext_resource type="Script" path="res://scripts/bubble.gd" id="1_mrpbr"]
-[ext_resource type="Texture2D" uid="uid://djcu8f03x4h8v" path="res://img/icon.svg" id="1_pwc8c"]
+[ext_resource type="PackedScene" uid="uid://clvycomtapab6" path="res://img/bubble.aseprite" id="2_ufo0f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gtchb"]
-radius = 33.0151
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_7cqhm"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_pwc8c")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+radius = 20.0
 
 [node name="Bubble" type="Area2D"]
 collision_layer = 4
@@ -24,8 +13,8 @@ script = ExtResource("1_mrpbr")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gtchb")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.359375, 0.359378)
-sprite_frames = SubResource("SpriteFrames_7cqhm")
+[node name="bubble" parent="." instance=ExtResource("2_ufo0f")]
+autoplay = "shimmer"
+frame_progress = 0.134247
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

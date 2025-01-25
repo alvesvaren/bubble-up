@@ -1,20 +1,14 @@
 [gd_scene load_steps=12 format=4 uid="uid://dg6f078aut376"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_yq23o"]
-[ext_resource type="Shader" path="res://shaders/hsv-shader.gdshader" id="3_w86vl"]
+[ext_resource type="Material" uid="uid://bojfk8j2wh66i" path="res://shaders/player.tres" id="2_i1wvi"]
+[ext_resource type="PackedScene" uid="uid://do7s4w8af10dm" path="res://img/fish2.aseprite" id="3_7kr7p"]
 
 [sub_resource type="Curve" id="Curve_xi0xo"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.194737, 1), -3.50471, -3.50471, 0, 0, Vector2(1, 0.197802), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.371316, 0.995266), 0.0, -2.0, 0, 0, Vector2(1, 0.197802), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p0rjk"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_isagx"]
-resource_local_to_scene = true
-shader = ExtResource("3_w86vl")
-shader_parameter/hue_shift = 0.0
-shader_parameter/sat_mul = 1.0
-shader_parameter/val_mul = 1.0
 
 [sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_psto0"]
 _data = PackedByteArray("AAADAAUAAAABAAAAHwAAAEAAAADqAAAAUklGRuIAAABXRUJQVlA4TNUAAAAvHsAPEC+gmJEkaBRGb/yf1xqshkI2kqCVWH+p707gNI5M2qZUw/zbHLs2/wHg/8nQlXdOgqNGkhyp1EtgDIG1/50uCMdgtfzJjKnz74j+M3DbtpG725t8BgDMq2FY6NxGCZEkc5nWbh4LyVi4NTedzIXMsZCG2UCvic3l8BVkLpu3idzM62JvkusNbDLqxgv4qm8T//2kC8CNE8blNIjMGOVH3CndXbq7dOf/dodyv0y53weE++OAct/x791NufvaOo5cW/dduu9ddx9igcvkbfg+dwAA")
@@ -66,10 +60,21 @@ flap_curve = SubResource("Curve_xi0xo")
 [node name="collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_p0rjk")
 
-[node name="fish1" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_isagx")
+[node name="sprites" type="Node2D" parent="."]
+
+[node name="1" type="AnimatedSprite2D" parent="sprites"]
+visible = false
+material = ExtResource("2_i1wvi")
 sprite_frames = SubResource("SpriteFrames_edo1p")
 animation = &"SIMMA"
 autoplay = "SIMMA"
 frame_progress = 0.56346
 flip_h = true
+
+[node name="2" parent="sprites" instance=ExtResource("3_7kr7p")]
+visible = false
+material = ExtResource("2_i1wvi")
+flip_h = true
+
+[node name="timer" type="Timer" parent="."]
+one_shot = true

@@ -4,7 +4,7 @@ extends Node2D
 
 var players: Array[int] = []
 
-func process_before():
+func process_before(delta):
 	for joypad in Input.get_connected_joypads():
 		if Input.is_joy_button_pressed(joypad, JOY_BUTTON_A) and joypad not in players:
 			join_player(joypad)

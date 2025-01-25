@@ -27,5 +27,5 @@ void fragment() {
 	color_hsv.y = min((color_hsv.y * sat_mul), 1.01);
 	color_hsv.z = min((color_hsv.z * val_mul), 1.01);
 	vec3 color_rgb = hsv2rgb(color_hsv);
-	COLOR.rgba = vec4(color_rgb.rgb,texture_color.a);
+	COLOR.rgba *= vec4(color_rgb.rgb,texture_color.a);
 }

@@ -10,33 +10,34 @@ const FIRST_PLAYER_OUTSIDE_SPEEDUP = 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	Manager.process_during.connect(process_during)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if Manager.state == Manager.DURING and players.get_child_count() > 0:
-		var avarage_pos = Vector2(0,0)
-		var count = 0
-		var progress = {}
+func process_during(delta: float) -> void:
+	if players.get_child_count() == 0:
+		return
+	var avarage_pos = Vector2(0,0)
+	var count = 0
+	var progress = {}
+	for child in players.get_children():
+		progress[child.name] = $"../..".curve.get_closest_offset(child.global_position)
+		avarage_pos += child.global_position
+		count += 1
+
+	if $"..".progress_ratio >= 0.99:
+		pass
+	else:
+		var first = first_player(progress)
 		for child in players.get_children():
-			progress[child.name] = $"../..".curve.get_closest_offset(child.global_position)
-			avarage_pos += child.global_position
-			count += 1
+			if (distance_to_edge(child.global_position) < 0) and first != child.name:
+				child.death.emit()
 
-		if $"..".progress_ratio >= 0.99:
-			pass
-		else:
-			var first = first_player(progress)
-			for child in players.get_children():
-				if (distance_to_edge(child.global_position) < 0) and first != child.name:
-					child.death.emit()
-
-			var first_edge_dist = distance_to_edge(players.get_node(first).global_position)
-			$"..".progress += delta * max(0.1, FIRST_PLAYER_FOLLOW_SPEED - first_edge_dist / 200) * (progress[first] - $"..".progress)
-			if first_edge_dist < FIRST_PLAYER_MIN_DIST:
-				$"..".progress += FIRST_PLAYER_OUTSIDE_SPEEDUP * delta * max(0.1, FIRST_PLAYER_FOLLOW_SPEED - first_edge_dist / 200) * (progress[first] - $"..".progress)
-			$shader.global_position = get_screen_center_position()
-			$shader.material.set_shader_parameter("offset", get_screen_center_position() * CAUSTIC_OFFSET_SCALE)
+		var first_edge_dist = distance_to_edge(players.get_node(first).global_position)
+		$"..".progress += delta * max(0.1, FIRST_PLAYER_FOLLOW_SPEED - first_edge_dist / 200) * (progress[first] - $"..".progress)
+		if first_edge_dist < FIRST_PLAYER_MIN_DIST:
+			$"..".progress += FIRST_PLAYER_OUTSIDE_SPEEDUP * delta * max(0.1, FIRST_PLAYER_FOLLOW_SPEED - first_edge_dist / 200) * (progress[first] - $"..".progress)
+		$shader.global_position = get_screen_center_position()
+		$shader.material.set_shader_parameter("offset", get_screen_center_position() * CAUSTIC_OFFSET_SCALE)
 
 
 func distance_to_edge(position: Vector2) -> float:

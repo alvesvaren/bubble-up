@@ -6,7 +6,8 @@ const SPEED = 200.0
 const DRAG = 0.004
 const STEER_FACTOR = 0.001
 
-const hue_offsets = [0.0, 0.25, 0.5, 0.75]
+var speed_multiplier = 1.0
+
 @export var player_index: int
 @export var flap_curve: Curve
 
@@ -16,6 +17,15 @@ var last_flap_time = 0
 var angular = 0
 
 signal death
+
+func stun(duration: float, pos: Vector2):
+	speed_multiplier = 0
+	velocity = velocity.bounce(pos.direction_to(global_position)) * 0.2
+	modulate = Color.RED
+	$timer.start(duration)
+	await $timer.timeout
+	speed_multiplier = 1
+	modulate = Color.WHITE
 
 func _ready() -> void:
 	death.connect(on_death)
@@ -60,10 +70,9 @@ func flap(axis: float):
 	last_flap_time = current_time
 	last_flap_was_right = current_flap_right
 
-	velocity += Vector2.from_angle(rotation) * (SPEED * flap_multiplier)
+	velocity += Vector2.from_angle(rotation) * (SPEED * flap_multiplier) * speed_multiplier
 
 func _physics_process(delta: float) -> void:
-
 	velocity -= velocity.normalized() * (velocity.length() * velocity.length()) * DRAG * delta
 
 	# Move force from "forwards" to "facing"
@@ -82,7 +91,10 @@ func _process(delta: float) -> void:
 	
 	angular = Vector2.from_angle(rotation).angle_to(direction)
 	rotate(angular * delta * 10)
+	var count = $sprites.get_child_count()
+	$sprites.get_children()[player_index % count].visible = true;
 	
-	$fish1.flip_v = Vector2.from_angle(global_rotation).x < 0
-	$fish1.material.set_shader_parameter("hue_shift", hue_offsets[player_index % len(hue_offsets)])
+	for sprite in $sprites.get_children():
+		sprite.flip_v = Vector2.from_angle(global_rotation).x < 0
+		sprite.material.set_shader_parameter("hue_shift", player_index * 1.0/12)
 	flap(current)

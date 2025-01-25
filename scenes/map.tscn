@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d1jvxhgsevlub" path="res://scenes/bubble.tscn" id="3_whuoy"]
 [ext_resource type="PackedScene" uid="uid://c567aloh2qp8u" path="res://scenes/goal.tscn" id="4_7gkvu"]
 [ext_resource type="PackedScene" uid="uid://c1kjopgq5x8dw" path="res://scenes/sponge.tscn" id="5_4gh5i"]
-[ext_resource type="PackedScene" path="res://scenes/camera.tscn" id="6_qi01l"]
+[ext_resource type="PackedScene" uid="uid://dxv8kn10275wu" path="res://scenes/camera.tscn" id="6_qi01l"]
 
 [sub_resource type="Curve2D" id="Curve2D_g64cm"]
 _data = {
@@ -39,3 +39,15 @@ position = Vector2(1, -3)
 rotates = false
 
 [node name="Camera2D" parent="CameraPath/PathFollow2D" instance=ExtResource("6_qi01l")]
+
+[node name="Bubble2" parent="." instance=ExtResource("3_whuoy")]
+position = Vector2(894, 354)
+
+[node name="Bubble3" parent="." instance=ExtResource("3_whuoy")]
+position = Vector2(536, 477)
+
+[node name="Bubble4" parent="." instance=ExtResource("3_whuoy")]
+position = Vector2(284, 427)
+
+[node name="Bubble5" parent="." instance=ExtResource("3_whuoy")]
+position = Vector2(145, 547)
