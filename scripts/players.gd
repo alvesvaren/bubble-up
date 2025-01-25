@@ -15,9 +15,6 @@ func process_before(delta):
 	if Input.is_action_just_pressed("start") and -1 in players:
 		Manager.set_state.emit(Manager.DURING)
 
-func _process(delta: float) -> void:
-	pass
-
 
 func join_player(id) -> void:
 	print("Player ", id, " joined")

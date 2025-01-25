@@ -14,6 +14,8 @@ var fullscreen = false
 
 func _set_state(new_state):
 	state = new_state
+	if state == BEFORE:
+		get_tree().reload_current_scene()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
