@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://djcu8f03x4h8v" path="res://img/icon.svg" id="1_cl61n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k4myt"]
-size = Vector2(72, 152)
+size = Vector2(72, 212)
 
 [node name="Sponge" type="Area2D"]
 script = ExtResource("1_2jbne")
@@ -13,7 +13,7 @@ script = ExtResource("1_2jbne")
 shape = SubResource("RectangleShape2D_k4myt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5625, 1.17187)
+scale = Vector2(0.5625, 1.75)
 texture = ExtResource("1_cl61n")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
