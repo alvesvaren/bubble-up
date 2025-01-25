@@ -10,13 +10,11 @@ func process_before(delta):
 			join_player(joypad)
 		if Input.is_joy_button_pressed(joypad, JOY_BUTTON_START) and joypad in players:
 			Manager.set_state.emit(Manager.DURING)
-	if Input.is_action_just_pressed("kb_p1_left") and -1 not in players:
-		join_player(-1)
-	if Input.is_action_just_pressed("start") and -1 in players:
-		Manager.set_state.emit(Manager.DURING)
-
-func _process(delta: float) -> void:
-	pass
+	for i in range(1, 3):
+		if Input.is_action_just_pressed("kb_p" + str(i) + "_left") and - i not in players:
+			join_player(- i)
+		if Input.is_action_just_pressed("start") and - i in players:
+			Manager.set_state.emit(Manager.DURING)
 
 
 func join_player(id) -> void:

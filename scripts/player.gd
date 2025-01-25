@@ -52,16 +52,16 @@ func on_bu(bu: BubbleUp.BU) -> void:
 			pass
 
 func get_flap_axis():
-	if player_index == -1:
+	if player_index < 0:
 		# keyboard
-		return Input.get_axis("kb_p1_flap_left", "kb_p1_flap_right")
+		return Input.get_axis("kb_p" + str(- player_index) + "_flap_left", "kb_p" + str(- player_index) + "_flap_right")
 	
 	return Input.get_joy_axis(player_index, JOY_AXIS_RIGHT_X)
 
 func get_dir():
-	if player_index == -1:
+	if player_index < 0:
 		# keyboard
-		return Vector2(Input.get_axis("kb_p1_left", "kb_p1_right"), Input.get_axis("kb_p1_up", "kb_p1_down"))
+		return Vector2(Input.get_axis("kb_p" + str(- player_index) + "_left", "kb_p" + str(- player_index) + "_right"), Input.get_axis("kb_p" + str(- player_index) + "_up", "kb_p" + str(- player_index) + "_down"))
 	
 	return Vector2(Input.get_joy_axis(player_index, JOY_AXIS_LEFT_X), Input.get_joy_axis(player_index, JOY_AXIS_LEFT_Y))
 
@@ -108,7 +108,7 @@ func _process(delta: float) -> void:
 	$bubble.visible = collected_bu == BubbleUp.BU.BUBBLE
 	$shield.visible = shield_active
 	
-	if collected_bu and (player_index == -1 and Input.is_action_just_pressed("kb_p1_use")) or (player_index != -1 and Input.is_joy_button_pressed(player_index, JOY_BUTTON_RIGHT_SHOULDER)):
+	if collected_bu and (player_index < 0 and Input.is_action_just_pressed("kb_p" + str(- player_index) + "_use")) or (player_index >= 0 and Input.is_joy_button_pressed(player_index, JOY_BUTTON_RIGHT_SHOULDER)):
 		match collected_bu:
 			BubbleUp.BU.BUBBLE:
 				var new_bubble = bubble_scene.instantiate()
