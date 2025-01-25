@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://78n4a175g7ui"]
+[gd_scene load_steps=13 format=3 uid="uid://78n4a175g7ui"]
 
 [ext_resource type="Script" path="res://scripts/camera.gd" id="2_pstin"]
 [ext_resource type="Shader" path="res://shaders/watershader.gdshader" id="3_xmvvh"]
+[ext_resource type="Script" path="res://scenes/players.gd" id="4_126x0"]
 [ext_resource type="Texture2D" uid="uid://8cuimg10rxe1" path="res://shaders/caustics.webp" id="4_ninpr"]
+[ext_resource type="Texture2D" uid="uid://cip6i0e7py7lc" path="res://img/tilemap.aseprite" id="5_3ypuo"]
 
 [sub_resource type="Curve2D" id="Curve2D_1k70t"]
 _data = {
@@ -25,7 +27,27 @@ shader_parameter/caustics = ExtResource("4_ninpr")
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0ow3f"]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cvtp8"]
+texture = ExtResource("5_3ypuo")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:1/0 = 0
+0:2/0 = 0
+1:0/0 = 0
+1:1/0 = 0
+1:2/0 = 0
+2:0/0 = 0
+2:1/0 = 0
+2:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_dpuch"]
+tile_size = Vector2i(32, 32)
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Stone"
+terrain_set_0/terrain_0/color = Color(0.3584, 0.43904, 0.56, 1)
+sources/0 = SubResource("TileSetAtlasSource_cvtp8")
+
+[node name="root" type="Node2D"]
 position = Vector2(151, 81)
 
 [node name="CameraPath" type="Path2D" parent="."]
@@ -44,6 +66,12 @@ script = ExtResource("2_pstin")
 
 [node name="shader" type="Sprite2D" parent="CameraPath/PathFollow2D/Camera2D"]
 material = SubResource("ShaderMaterial_4j02e")
-position = Vector2(-7.80434, -4.96385)
-scale = Vector2(443.609, 259.072)
+position = Vector2(-16.1087, -7.92767)
+scale = Vector2(853, 495)
 texture = SubResource("PlaceholderTexture2D_0ow3f")
+
+[node name="players" type="Node2D" parent="."]
+script = ExtResource("4_126x0")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_dpuch")

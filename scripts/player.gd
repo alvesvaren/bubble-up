@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+class_name Player
 
 const SPEED = 400.0
 const DRAG = 0.002

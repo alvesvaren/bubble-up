@@ -1,37 +1,28 @@
 extends Node
 
-
 enum {BEFORE, DURING, AFTER}
 var state = BEFORE
 var players = []
-@onready var player = load("res://scenes/player.tscn")
+
+signal set_state
+
+signal process_before
+signal process_during
+signal process_after
+
+func _set_state(new_state):
+	state = new_state
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("hej")
-
+	set_state.connect(_set_state)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	match state:
 		BEFORE:
-			for joypad in Input.get_connected_joypads():
-				if Input.is_joy_button_pressed(joypad, JOY_BUTTON_A) and joypad not in players:
-					join_player(joypad)
-				if Input.is_joy_button_pressed(joypad, JOY_BUTTON_START) and joypad in players:
-					state = DURING
-			if Input.is_action_just_pressed("kb_p1_left") and -1 not in players:
-				join_player(-1)
-			if Input.is_action_just_pressed("start") and -1 in players:
-				state = DURING
+			process_before.emit()
 		DURING:
-			pass
+			process_during.emit()
 		AFTER:
-			pass
-
-
-func join_player(id) -> void:
-	var new_player = player.instantiate()
-	new_player.player_index = id
-	get_tree().root.add_child(new_player)
-	players.append(id)
+			process_after.emit()

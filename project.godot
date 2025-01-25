@@ -21,8 +21,8 @@ Manager="*res://scripts/manager.gd"
 
 [display]
 
-window/size/viewport_width=420
-window/size/viewport_height=240
+window/size/viewport_width=840
+window/size/viewport_height=480
 window/size/mode=2
 window/size/window_width_override=840
 window/size/window_height_override=480
