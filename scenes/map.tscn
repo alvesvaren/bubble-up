@@ -21,28 +21,30 @@ tile_set = ExtResource("1_2bbjh")
 [node name="Wall" parent="." instance=ExtResource("2_qx2qk")]
 position = Vector2(149, -29)
 
-[node name="Bubble" parent="." instance=ExtResource("3_whuoy")]
-position = Vector2(393, 0)
-
 [node name="Goal" parent="." instance=ExtResource("4_7gkvu")]
 position = Vector2(980, 965)
 
 [node name="Sponge" parent="." instance=ExtResource("5_4gh5i")]
 position = Vector2(1185, 225)
 
-[node name="Bubble2" parent="." instance=ExtResource("3_whuoy")]
+[node name="bubbles" type="Node2D" parent="."]
+
+[node name="Bubble" parent="bubbles" instance=ExtResource("3_whuoy")]
+position = Vector2(393, 0)
+
+[node name="Bubble2" parent="bubbles" instance=ExtResource("3_whuoy")]
 position = Vector2(894, 354)
 
-[node name="Bubble3" parent="." instance=ExtResource("3_whuoy")]
+[node name="Bubble3" parent="bubbles" instance=ExtResource("3_whuoy")]
 position = Vector2(536, 477)
 
-[node name="Bubble4" parent="." instance=ExtResource("3_whuoy")]
+[node name="Bubble4" parent="bubbles" instance=ExtResource("3_whuoy")]
 position = Vector2(284, 427)
 
-[node name="Bubble5" parent="." instance=ExtResource("3_whuoy")]
+[node name="Bubble5" parent="bubbles" instance=ExtResource("3_whuoy")]
 position = Vector2(145, 547)
 
-[node name="Powerup" parent="." instance=ExtResource("7_alqxc")]
+[node name="Powerup" parent="bubbles" instance=ExtResource("7_alqxc")]
 position = Vector2(544, 59)
 
 [node name="CameraPath" type="Path2D" parent="."]

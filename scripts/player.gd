@@ -10,12 +10,15 @@ var speed_multiplier = 1.0
 
 @export var player_index: int
 @export var flap_curve: Curve
+@export var bubble_scene: PackedScene
 
 var last_flap_was_right = false
 var last_flap_time = 0
 
 var angular = 0
 var caught = false
+var bubble = false
+var shield = false
 
 signal death
 
@@ -80,7 +83,16 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 
 func _process(delta: float) -> void:
+	$bubble.visible = bubble
+	$shield.visible = shield
 	
+	if bubble:
+		if (player_index == -1 and Input.is_action_just_pressed("kb_p1_use")) or (player_index != -1 and Input.is_joy_button_pressed(player_index, JOY_BUTTON_RIGHT_SHOULDER)):
+			bubble = false
+			var new_bubble = bubble_scene.instantiate()
+			new_bubble.global_position = $bubble.global_position
+			get_parent().get_parent().get_node("map/bubbles").add_child(new_bubble)
+			
 	var current = get_flap_axis()
 	
 	var angle_difference = rotation - velocity.angle()
@@ -98,3 +110,11 @@ func _process(delta: float) -> void:
 		sprite.flip_v = Vector2.from_angle(global_rotation).x < 0
 		sprite.material.set_shader_parameter("hue_shift", player_index * 1.0/12)
 	flap(current)
+
+func start_shield() -> void:
+	$ShieldTimer.start()
+	shield = true
+
+
+func _on_shield_timer_timeout() -> void:
+	shield = false
