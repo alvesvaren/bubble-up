@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1jvxhgsevlub"]
+[gd_scene load_steps=7 format=3 uid="uid://d1jvxhgsevlub"]
 
 [ext_resource type="Script" path="res://scripts/bubble.gd" id="1_mrpbr"]
+[ext_resource type="PackedScene" uid="uid://d3r2plysd45dh" path="res://sounds/pop.tscn" id="2_ppd3l"]
 [ext_resource type="PackedScene" uid="uid://clvycomtapab6" path="res://img/bubble.aseprite" id="2_ufo0f"]
 [ext_resource type="Shader" path="res://shaders/hsv-shader.gdshader" id="3_fowgt"]
 
@@ -17,6 +18,7 @@ shader_parameter/val_mul = 1.0
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_mrpbr")
+pop_sound = ExtResource("2_ppd3l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gtchb")

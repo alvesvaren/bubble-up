@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3r2plysd45dh"]
+
+[ext_resource type="AudioStream" uid="uid://dpkgyf3ewklcp" path="res://sounds/bubble_pop.ogg" id="1_7n6bu"]
+
+[node name="Pop" type="AudioStreamPlayer"]
+stream = ExtResource("1_7n6bu")
+autoplay = true

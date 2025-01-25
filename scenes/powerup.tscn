@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqcd3dx5oqh68"]
+[gd_scene load_steps=5 format=3 uid="uid://dqcd3dx5oqh68"]
 
 [ext_resource type="Script" path="res://scripts/powerup.gd" id="1_n1hpw"]
+[ext_resource type="PackedScene" uid="uid://cfgooegccbmco" path="res://sounds/power_up.tscn" id="2_tqlns"]
 [ext_resource type="PackedScene" uid="uid://blxgqe537tbx" path="res://img/stjärna aseprite.aseprite" id="2_x4fcm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lk5uf"]
@@ -9,6 +10,7 @@ radius = 20.0
 [node name="Powerup" type="Area2D"]
 collision_layer = 4
 script = ExtResource("1_n1hpw")
+bubble_up_sound = ExtResource("2_tqlns")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_lk5uf")

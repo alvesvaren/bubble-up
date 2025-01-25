@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfgooegccbmco"]
+
+[ext_resource type="AudioStream" uid="uid://0hxe47sjqvit" path="res://sounds/Bubble-up.wav" id="1_k07mc"]
+
+[node name="PowerUp" type="AudioStreamPlayer"]
+stream = ExtResource("1_k07mc")
+autoplay = true

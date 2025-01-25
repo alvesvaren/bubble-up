@@ -5,6 +5,7 @@ var player = null;
 var vel = 0;
 
 const FLOAT_ACC = -100;
+@export var pop_sound: PackedScene
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player and active and active and not body.shield_active:
@@ -29,6 +30,7 @@ func burst() -> void:
 		player.velocity = Vector2(0,0)
 		player.caught = false
 	$bubble.play("burst")
+	get_parent().add_child(pop_sound.instantiate())
 	await $bubble.animation_finished
 	queue_free()
 
