@@ -16,6 +16,8 @@ func _process(delta: float) -> void:
 		var count = 0
 		var progress = {}
 		for child in $"../../../players".get_children():
+			if distance_to_edge(child.global_position) < 0:
+				child.death.emit()
 			progress[child.name] = $"../..".curve.get_closest_offset(child.global_position)
 			avarage_pos += child.global_position
 			count += 1

@@ -14,6 +14,14 @@ var last_flap_time = 0
 
 var angular = 0
 
+signal death
+
+func _ready() -> void:
+	death.connect(on_death)
+
+func on_death() -> void:
+	queue_free()
+
 func get_flap_axis():
 	if player_index == -1:
 		# keyboard
