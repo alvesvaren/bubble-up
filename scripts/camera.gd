@@ -11,7 +11,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Manager.state == Manager.DURING:
+	if Manager.state == Manager.DURING and %players.get_child_count() > 0:
 		var avarage_pos = Vector2(0,0)
 		var count = 0
 		var progress = {}
