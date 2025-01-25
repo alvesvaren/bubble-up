@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=4 uid="uid://dg6f078aut376"]
+[gd_scene load_steps=14 format=4 uid="uid://dg6f078aut376"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_yq23o"]
 [ext_resource type="Material" uid="uid://bojfk8j2wh66i" path="res://shaders/player.tres" id="2_i1wvi"]
 [ext_resource type="PackedScene" uid="uid://do7s4w8af10dm" path="res://img/fish2.aseprite" id="3_7kr7p"]
+[ext_resource type="Shader" path="res://shaders/hsv-shader.gdshader" id="4_cqnsm"]
 
 [sub_resource type="Curve" id="Curve_xi0xo"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.371316, 0.995266), 0.0, -2.0, 0, 0, Vector2(1, 0.197802), 0.0, 0.0, 0, 0]
@@ -52,6 +53,13 @@ animations = [{
 "speed": 1.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_80gl1"]
+resource_local_to_scene = true
+shader = ExtResource("4_cqnsm")
+shader_parameter/hue_shift = 0.605
+shader_parameter/sat_mul = 1.0
+shader_parameter/val_mul = 1.0
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 2
 script = ExtResource("1_yq23o")
@@ -73,7 +81,7 @@ flip_h = true
 
 [node name="2" parent="sprites" instance=ExtResource("3_7kr7p")]
 visible = false
-material = ExtResource("2_i1wvi")
+material = SubResource("ShaderMaterial_80gl1")
 flip_h = true
 
 [node name="timer" type="Timer" parent="."]

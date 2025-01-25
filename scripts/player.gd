@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name Player
 
-const SPEED = 200.0
+const SPEED = 100.0
 const DRAG = 0.004
 const STEER_FACTOR = 0.001
 
@@ -20,7 +20,8 @@ signal death
 
 func stun(duration: float, pos: Vector2):
 	speed_multiplier = 0
-	velocity = velocity.bounce(pos.direction_to(global_position)) * 0.2
+	#velocity = velocity.bounce(pos.direction_to(global_position)) * 0.2
+	velocity *= 0.5
 	modulate = Color.RED
 	$timer.start(duration)
 	await $timer.timeout
