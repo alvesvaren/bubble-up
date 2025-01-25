@@ -2,7 +2,9 @@ extends Camera2D
 
 
 const CAUSTIC_OFFSET_SCALE = 0.1
-const FIRST_PLAYER_OFFSET = 50
+const FIRST_PLAYER_MIN_DIST = 100
+const FIRST_PLAYER_FOLLOW_SPEED = 3
+const FIRST_PLAYER_OUTSIDE_SPEEDUP = 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -26,7 +28,10 @@ func _process(delta: float) -> void:
 				child.death.emit()
 
 		var first_edge_dist = distance_to_edge(%players.get_node(first).global_position)
-		$"..".progress += delta * (3.5 - first_edge_dist / 200) * (max(0, progress[first_player(progress)] - FIRST_PLAYER_OFFSET) - $"..".progress)
+		$"..".progress += delta * max(0.1, FIRST_PLAYER_FOLLOW_SPEED - first_edge_dist / 200) * (progress[first_player(progress)] - $"..".progress)
+		if first_edge_dist < FIRST_PLAYER_MIN_DIST:
+			print("I am speed!!!")
+			$"..".progress += FIRST_PLAYER_OUTSIDE_SPEEDUP * delta * max(0.1, FIRST_PLAYER_FOLLOW_SPEED - first_edge_dist / 200) * (progress[first_player(progress)] - $"..".progress)
 		$shader.global_position = get_screen_center_position()
 		$shader.material.set_shader_parameter("offset", get_screen_center_position() * CAUSTIC_OFFSET_SCALE)
 
