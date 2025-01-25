@@ -73,8 +73,6 @@ func _process(delta: float) -> void:
 	angular = Vector2.from_angle(rotation).angle_to(direction)
 	rotate(angular * delta * 10)
 	
-	$fish1.flip_h = Vector2.from_angle(global_rotation).x < 0
 	$fish1.flip_v = Vector2.from_angle(global_rotation).x < 0
-	
 	
 	flap(current)

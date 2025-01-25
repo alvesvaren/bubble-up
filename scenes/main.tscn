@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/camera.gd" id="2_pstin"]
 [ext_resource type="Shader" path="res://shaders/watershader.gdshader" id="3_xmvvh"]
-[ext_resource type="Script" path="res://scenes/players.gd" id="4_126x0"]
+[ext_resource type="Script" path="res://scripts/players.gd" id="4_126x0"]
 [ext_resource type="Texture2D" uid="uid://8cuimg10rxe1" path="res://shaders/caustics.webp" id="4_ninpr"]
 [ext_resource type="TileSet" uid="uid://u6jihf0e3jyi" path="res://img/tileset.tres" id="5_c0ob3"]
 

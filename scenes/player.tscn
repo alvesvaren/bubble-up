@@ -18,3 +18,4 @@ flap_curve = SubResource("Curve_xi0xo")
 shape = SubResource("CircleShape2D_p0rjk")
 
 [node name="fish1" parent="." instance=ExtResource("3_2skpk")]
+flip_h = true
