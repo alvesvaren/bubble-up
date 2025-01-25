@@ -1,6 +1,8 @@
 extends Camera2D
 
 
+const CAUSTIC_OFFSET_SCALE = 0.1
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -18,6 +20,8 @@ func _process(delta: float) -> void:
 			count += 1
 
 		$"..".progress = progress[first_player(progress)]
+		$shader.global_position = get_screen_center_position()
+		$shader.material.set_shader_parameter("offset", get_screen_center_position() * CAUSTIC_OFFSET_SCALE)
 
 func first_player(progress) -> String:
 	var best = "Player"

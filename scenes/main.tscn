@@ -4,7 +4,7 @@
 [ext_resource type="Shader" path="res://shaders/watershader.gdshader" id="3_xmvvh"]
 [ext_resource type="Script" path="res://scripts/players.gd" id="4_126x0"]
 [ext_resource type="Texture2D" uid="uid://8cuimg10rxe1" path="res://shaders/caustics.webp" id="4_ninpr"]
-[ext_resource type="TileSet" uid="uid://u6jihf0e3jyi" path="res://img/tileset.tres" id="5_c0ob3"]
+[ext_resource type="TileSet" uid="uid://7wlisssnh60u" path="res://img/tileset.tres" id="5_c0ob3"]
 
 [sub_resource type="Curve2D" id="Curve2D_1k70t"]
 _data = {
@@ -20,6 +20,7 @@ noise = SubResource("FastNoiseLite_dhcs2")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4j02e"]
 shader = ExtResource("3_xmvvh")
 shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/offset = Vector2(0, 0)
 shader_parameter/speed = Vector2(0.03, 0.04)
 shader_parameter/wave_strength = 1.0
 shader_parameter/fast_noise = SubResource("NoiseTexture2D_x5ka6")
@@ -46,7 +47,7 @@ script = ExtResource("2_pstin")
 
 [node name="shader" type="Sprite2D" parent="CameraPath/PathFollow2D/Camera2D"]
 material = SubResource("ShaderMaterial_4j02e")
-position = Vector2(-16.1087, -7.92767)
+position = Vector2(-6.6087, 0.572299)
 scale = Vector2(853, 495)
 texture = SubResource("PlaceholderTexture2D_0ow3f")
 
