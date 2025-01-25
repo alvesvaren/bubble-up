@@ -53,7 +53,7 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_80gl1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6nhl1"]
 resource_local_to_scene = true
 shader = ExtResource("4_cqnsm")
 shader_parameter/hue_shift = 0.605
@@ -81,7 +81,7 @@ flip_h = true
 
 [node name="2" parent="sprites" instance=ExtResource("3_7kr7p")]
 visible = false
-material = SubResource("ShaderMaterial_80gl1")
+material = SubResource("ShaderMaterial_6nhl1")
 flip_h = true
 
 [node name="timer" type="Timer" parent="."]

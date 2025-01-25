@@ -15,6 +15,7 @@ var last_flap_was_right = false
 var last_flap_time = 0
 
 var angular = 0
+var caught = false
 
 signal death
 
@@ -74,11 +75,9 @@ func flap(axis: float):
 	velocity += Vector2.from_angle(rotation) * (SPEED * flap_multiplier) * speed_multiplier
 
 func _physics_process(delta: float) -> void:
-	velocity -= velocity.normalized() * (velocity.length() * velocity.length()) * DRAG * delta
-
-	# Move force from "forwards" to "facing"
-
-	move_and_slide()
+	if not caught:
+		velocity -= velocity.normalized() * (velocity.length() * velocity.length()) * DRAG * delta
+		move_and_slide()
 
 func _process(delta: float) -> void:
 	
