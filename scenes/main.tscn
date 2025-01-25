@@ -1,17 +1,40 @@
-[gd_scene load_steps=12 format=4 uid="uid://78n4a175g7ui"]
+[gd_scene load_steps=15 format=3 uid="uid://78n4a175g7ui"]
 
 [ext_resource type="Script" path="res://scripts/camera.gd" id="2_pstin"]
 [ext_resource type="Shader" path="res://shaders/watershader.gdshader" id="3_xmvvh"]
 [ext_resource type="Script" path="res://scripts/players.gd" id="4_126x0"]
-[ext_resource type="Texture2D" uid="uid://8cuimg10rxe1" path="res://shaders/caustics.webp" id="4_ninpr"]
-[ext_resource type="TileSet" uid="uid://u6jihf0e3jyi" path="res://img/tileset.tres" id="5_c0ob3"]
+[ext_resource type="PackedScene" path="res://scenes/wall.tscn" id="6_b32pa"]
 [ext_resource type="AudioStream" uid="uid://p58qqckoeg35" path="res://sounds/menu_loop.ogg" id="6_wx3br"]
+[ext_resource type="PackedScene" uid="uid://d12u3wfklhtjd" path="res://scenes/map.tscn" id="7_6wj1g"]
 
 [sub_resource type="Curve2D" id="Curve2D_1k70t"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -1, 7, -135.417, -188.871, 135.417, 188.871, 997, 165, 301.124, -272.615, -301.124, 272.615, 1153, 723, 222.725, 114.035, -222.725, -114.035, -131, 946)
+"points": PackedVector2Array(0, 0, 0, 0, 1, -3, -135.417, -188.871, 135.417, 188.871, 1136, 170, 258.287, -202.059, -258.287, 202.059, 1069, 835, 262.77, -19.449, -262.77, 19.449, -331, 1045)
 }
 point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_s1kng"]
+interpolation_mode = 2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bmgxs"]
+noise_type = 2
+frequency = 0.05
+fractal_type = 0
+fractal_octaves = 1
+fractal_lacunarity = 1.635
+fractal_gain = 3.405
+fractal_weighted_strength = 0.77
+cellular_distance_function = 1
+cellular_jitter = 1.47
+domain_warp_enabled = true
+domain_warp_type = 2
+domain_warp_amplitude = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_irr3h"]
+seamless = true
+seamless_blend_skirt = 0.141
+color_ramp = SubResource("Gradient_s1kng")
+noise = SubResource("FastNoiseLite_bmgxs")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_dhcs2"]
 
@@ -20,30 +43,43 @@ noise = SubResource("FastNoiseLite_dhcs2")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4j02e"]
 shader = ExtResource("3_xmvvh")
-shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/color = Color(0.445732, 0.596509, 0.689985, 1)
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/speed = Vector2(0.03, 0.04)
 shader_parameter/wave_strength = 1.0
 shader_parameter/fast_noise = SubResource("NoiseTexture2D_x5ka6")
-shader_parameter/caustics = ExtResource("4_ninpr")
+shader_parameter/caustics = SubResource("NoiseTexture2D_irr3h")
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0ow3f"]
 
 [node name="root" type="Node2D"]
 position = Vector2(151, 81)
 
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_wx3br")
+autoplay = true
+parameters/looping = true
+
+[node name="players" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_126x0")
+
+[node name="Wall" parent="." instance=ExtResource("6_b32pa")]
+position = Vector2(149, -29)
+
+[node name="map" parent="." instance=ExtResource("7_6wj1g")]
+
 [node name="CameraPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_1k70t")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="CameraPath"]
-position = Vector2(-1, 7)
+position = Vector2(1, -3)
 rotates = false
 
 [node name="Camera2D" type="Camera2D" parent="CameraPath/PathFollow2D"]
-position = Vector2(-65.3913, -46.5723)
+position = Vector2(-6, -7)
 ignore_rotation = false
-position_smoothing_enabled = true
-position_smoothing_speed = 10.0
+position_smoothing_speed = 100.0
 script = ExtResource("2_pstin")
 
 [node name="shader" type="Sprite2D" parent="CameraPath/PathFollow2D/Camera2D"]
@@ -51,15 +87,3 @@ material = SubResource("ShaderMaterial_4j02e")
 position = Vector2(-6.6087, 0.572299)
 scale = Vector2(853, 495)
 texture = SubResource("PlaceholderTexture2D_0ow3f")
-
-[node name="players" type="Node2D" parent="."]
-script = ExtResource("4_126x0")
-
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAD0//n/AAABAAEAAAD1//n/AAABAAIAAAD1//j/AAABAAAAAAD0//j/AAABAAAAAAD2//j/AAABAAAAAAD2//n/AAABAAIAAAD3//j/AAABAAAAAAD3//n/AAABAAIAAAD4//j/AAABAAAAAAD4//n/AAABAAIAAAD5//n/AAABAAIAAAD5//j/AAABAAAAAAD6//j/AAABAAAAAAD7//j/AAABAAAAAAD8//j/AAABAAAAAAD9//j/AAABAAAAAAD+//j/AAABAAAAAAD///j/AAABAAAAAAAAAPj/AAABAAAAAAABAPj/AAABAAAAAAACAPj/AAACAAAAAAACAPn/AAACAAIAAAABAPn/AAABAAIAAAAAAPn/AAABAAIAAAD///n/AAABAAIAAAD+//n/AAABAAIAAAD9//n/AAABAAIAAAD8//n/AAABAAIAAAD7//n/AAABAAIAAAD6//n/AAABAAIAAAD0//r/AAACAAIAAADz//r/AAABAAEAAADz//n/AAABAAEAAADy//n/AAAAAAAAAADy//r/AAAAAAEAAADz//j/AAAAAAAAAADz//v/AAACAAEAAADy//v/AAAAAAEAAADz//z/AAACAAEAAADy//z/AAAAAAEAAADy//3/AAAAAAIAAADz//3/AAABAAEAAAD0//3/AAACAAAAAAD0//7/AAABAAEAAADz//7/AAAAAAIAAAD1//7/AAABAAAAAAD2//7/AAABAAAAAAD3//7/AAABAAAAAAD4//7/AAABAAAAAAD3////AAABAAIAAAD2////AAABAAIAAAD4////AAABAAIAAAD5////AAABAAIAAAD6////AAABAAIAAAD7////AAACAAIAAAD7//7/AAACAAAAAAD6//7/AAABAAAAAAD5//7/AAABAAAAAAD1////AAABAAIAAAD0////AAAAAAIAAAADAP3/AAABAAEAAAACAP3/AAAAAAEAAAAEAP3/AAABAAEAAAAEAP7/AAABAAEAAAADAP7/AAABAAEAAAACAP7/AAAAAAIAAAADAP//AAAAAAEAAAAEAP//AAACAAEAAAADAAAAAAABAAEAAAAEAAAAAAACAAIAAAADAPz/AAABAAAAAAACAPz/AAAAAAAAAAAEAPz/AAACAAAAAAAFAP3/AAACAAAAAAAFAP7/AAACAAIAAAACAAAAAAAAAAAAAAACAAEAAAAAAAIAAAADAAEAAAACAAIAAAA=")
-tile_set = ExtResource("5_c0ob3")
-
-[node name="music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_wx3br")
-autoplay = true
-parameters/looping = true
