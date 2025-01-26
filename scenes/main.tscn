@@ -4,7 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://bt2r55slhy5by" path="res://sounds/intro_2.ogg" id="2_5oboc"]
 [ext_resource type="Script" path="res://scripts/music.gd" id="2_to8b1"]
 [ext_resource type="Script" path="res://scripts/players.gd" id="4_126x0"]
-[ext_resource type="PackedScene" uid="uid://c2c80tskiikse" path="res://scenes/map.tscn" id="4_a5v55"]
+[ext_resource type="PackedScene" uid="uid://d12u3wfklhtjd" path="res://scenes/map.tscn" id="4_a5v55"]
 [ext_resource type="AudioStream" uid="uid://30b5s5wkdhnd" path="res://sounds/sak.ogg" id="4_crj5a"]
 [ext_resource type="Texture2D" uid="uid://dfl13fairq4b1" path="res://img/cave_bg.aseprite" id="4_yxlcv"]
 [ext_resource type="AudioStream" uid="uid://c1fqeupli8l8a" path="res://sounds/the_final_countdown.ogg" id="6_7rx4h"]

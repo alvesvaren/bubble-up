@@ -1,11 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://c2c80tskiikse"]
+[gd_scene load_steps=8 format=4 uid="uid://d12u3wfklhtjd"]
 
-[ext_resource type="TileSet" uid="uid://c2iiylt65tr33" path="res://img/tileset.tres" id="1_2bbjh"]
-[ext_resource type="PackedScene" path="res://scenes/wall.tscn" id="2_qx2qk"]
-[ext_resource type="PackedScene" path="res://scenes/bubble.tscn" id="3_whuoy"]
+[ext_resource type="TileSet" uid="uid://u6jihf0e3jyi" path="res://img/tileset.tres" id="1_2bbjh"]
+[ext_resource type="PackedScene" uid="uid://dr5lyvg3o4q2c" path="res://scenes/wall.tscn" id="2_qx2qk"]
+[ext_resource type="PackedScene" uid="uid://d1jvxhgsevlub" path="res://scenes/bubble.tscn" id="3_whuoy"]
 [ext_resource type="Texture2D" uid="uid://dhctxiaktfojn" path="res://img/end screen.aseprite" id="6_cbsbu"]
-[ext_resource type="PackedScene" path="res://scenes/powerup.tscn" id="6_erodb"]
-[ext_resource type="PackedScene" path="res://scenes/camera.tscn" id="6_qi01l"]
+[ext_resource type="PackedScene" uid="uid://dqcd3dx5oqh68" path="res://scenes/powerup.tscn" id="6_erodb"]
+[ext_resource type="PackedScene" uid="uid://dxv8kn10275wu" path="res://scenes/camera.tscn" id="6_qi01l"]
 
 [sub_resource type="Curve2D" id="Curve2D_g64cm"]
 _data = {
