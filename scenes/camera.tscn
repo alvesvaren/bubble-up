@@ -1,7 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://dxv8kn10275wu"]
+[gd_scene load_steps=11 format=3 uid="uid://dxv8kn10275wu"]
 
 [ext_resource type="Script" path="res://scripts/camera.gd" id="1_ouyua"]
 [ext_resource type="Shader" path="res://shaders/watershader.gdshader" id="2_qcvmp"]
+
+[sub_resource type="Curve" id="Curve_a52tw"]
+max_value = 6.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.784211, 3.89011), 9.23076, 9.23076, 0, 0, Vector2(0.99999, 6), 0.0, 0.0, 0, 0, Vector2(1, 6), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="Gradient" id="Gradient_4rjib"]
 interpolation_mode = 2
@@ -47,6 +52,7 @@ position = Vector2(-6, -7)
 ignore_rotation = false
 position_smoothing_speed = 100.0
 script = ExtResource("1_ouyua")
+zoom_curve = SubResource("Curve_a52tw")
 
 [node name="shader" type="Sprite2D" parent="."]
 z_index = 100

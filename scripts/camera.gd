@@ -5,8 +5,12 @@ const CAUSTIC_OFFSET_SCALE = 0.1
 const FIRST_PLAYER_MIN_DIST = 100
 const FIRST_PLAYER_FOLLOW_SPEED = 3
 const FIRST_PLAYER_OUTSIDE_SPEEDUP = 2
+const ZOOM_TIME = 120
 
 @onready var players = get_tree().root.get_node("root/players")
+@export var zoom_curve: Curve
+
+var start_time = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,7 +21,9 @@ func _ready() -> void:
 
 func state_change(state) -> void:
 	if state == Manager.BEFORE:
-		$RichTextLabel.visible = false
+		$EndScreen.visible = false
+	if state == Manager.DURING:
+		start_time = Time.get_ticks_msec()
 
 func process_after(delta) -> void:
 	for joypad in Input.get_connected_joypads():
@@ -28,8 +34,12 @@ func process_after(delta) -> void:
 
 func process_during(delta: float) -> void:
 	if players.get_child_count() == 1:
-		$RichTextLabel.visible = true
+		$EndScreen.visible = true
 		Manager.set_state.emit(Manager.AFTER)
+	elif players.get_child_count() > 1:
+		var time_progress = (Time.get_ticks_msec() - start_time) / 1000.0 / ZOOM_TIME
+		var zoom_sample = zoom_curve.sample(time_progress)
+		zoom = Vector2(zoom_sample, zoom_sample)
 
 func _process(delta: float) -> void:
 	if players.get_child_count() > 0 and Manager.state != Manager.BEFORE:
@@ -50,9 +60,9 @@ func _process(delta: float) -> void:
 					child.death.emit()
 
 			var first_edge_dist = distance_to_edge(players.get_node(first).global_position)
-			$"..".progress += delta * max(0.1, FIRST_PLAYER_FOLLOW_SPEED - first_edge_dist / 200) * (progress[first] - $"..".progress)
+			$"..".progress += zoom.x * delta * max(0.1, FIRST_PLAYER_FOLLOW_SPEED - first_edge_dist / 200) * (progress[first] - $"..".progress)
 			if first_edge_dist < FIRST_PLAYER_MIN_DIST:
-				$"..".progress += FIRST_PLAYER_OUTSIDE_SPEEDUP * delta * max(0.1, FIRST_PLAYER_FOLLOW_SPEED - first_edge_dist / 200) * (progress[first] - $"..".progress)
+				$"..".progress += zoom.x * FIRST_PLAYER_OUTSIDE_SPEEDUP * delta * max(0.1, FIRST_PLAYER_FOLLOW_SPEED - first_edge_dist / 200) * (progress[first] - $"..".progress)
 			$shader.global_position = get_screen_center_position()
 			$shader.material.set_shader_parameter("offset", get_screen_center_position() * CAUSTIC_OFFSET_SCALE)
 
