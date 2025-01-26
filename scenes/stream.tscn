@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://ch2ldfeuegri3"]
+[gd_scene load_steps=3 format=3 uid="uid://c1ksaw17coilk"]
 
 [ext_resource type="Script" path="res://scripts/stream.gd" id="1_si1ql"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nb0kx"]
-size = Vector2(200, 236)
+size = Vector2(46, 236)
 
 [node name="Stream" type="Area2D"]
 script = ExtResource("1_si1ql")
