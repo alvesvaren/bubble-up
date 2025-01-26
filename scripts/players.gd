@@ -8,7 +8,7 @@ func process_before(delta):
 	for joypad in Input.get_connected_joypads():
 		if Input.is_joy_button_pressed(joypad, JOY_BUTTON_A) and joypad not in players:
 			join_player(joypad)
-		if Input.is_joy_button_pressed(joypad, JOY_BUTTON_START) and not $countdown.playing:
+		if Input.is_joy_button_pressed(joypad, JOY_BUTTON_START) and not $"../music/countdown".playing:
 			countdown()
 
 	for i in range(1, 3):
