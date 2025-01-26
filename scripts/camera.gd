@@ -5,7 +5,7 @@ const CAUSTIC_OFFSET_SCALE = 0.1
 const FIRST_PLAYER_MIN_DIST = 100
 const FIRST_PLAYER_FOLLOW_SPEED = 2
 const FIRST_PLAYER_OUTSIDE_SPEEDUP = 2
-const ZOOM_TIME = 120
+const ZOOM_TIME = 300
 
 @onready var players = get_tree().root.get_node("root/players")
 @export var zoom_curve: Curve
