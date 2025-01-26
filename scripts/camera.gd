@@ -3,12 +3,16 @@ extends Camera2D
 
 const CAUSTIC_OFFSET_SCALE = 0.1
 const FIRST_PLAYER_MIN_DIST = 100
-const FIRST_PLAYER_FOLLOW_SPEED = 3
+const FIRST_PLAYER_FOLLOW_SPEED = 2
 const FIRST_PLAYER_OUTSIDE_SPEEDUP = 2
 const ZOOM_TIME = 120
 
 @onready var players = get_tree().root.get_node("root/players")
 @export var zoom_curve: Curve
+@export var target: Node2D
+
+var first = null
+var progresses = {}
 
 var start_time = 0
 
@@ -43,28 +47,25 @@ func process_during(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	if players.get_child_count() > 0 and Manager.state != Manager.BEFORE:
-		var avarage_pos = Vector2(0,0)
-		var count = 0
-		var progress = {}
+		progresses = {}
 		for child in players.get_children():
-			progress[child.name] = $"../..".curve.get_closest_offset(child.global_position)
-			avarage_pos += child.global_position
-			count += 1
+			progresses[child.name] = get_parent().get_node("CameraPath").curve.get_closest_offset(child.global_position)
 
-		if $"..".progress_ratio >= 0.99:
-			pass
-		else:
-			var first = first_player(progress)
-			for child in players.get_children():
-				if (distance_to_edge(child.global_position) < 0) and first != child.name:
-					child.death.emit()
+		first = first_player(progresses)
+		for child in players.get_children():
+			if (distance_to_edge(child.global_position) < 0) and first != child.name:
+				child.death.emit()
+		print(first, progresses[first], target.global_position)
+		target.get_parent().progress = progresses[first]
+		$shader.global_position = get_screen_center_position()
+		$shader.material.set_shader_parameter("offset", get_screen_center_position() * CAUSTIC_OFFSET_SCALE)
+		move_towards_target(delta)
 
-			var first_edge_dist = distance_to_edge(players.get_node(first).global_position)
-			$"..".progress += zoom.x * delta * max(0.1, FIRST_PLAYER_FOLLOW_SPEED - first_edge_dist / 200) * (progress[first] - $"..".progress)
-			if first_edge_dist < FIRST_PLAYER_MIN_DIST:
-				$"..".progress += zoom.x * FIRST_PLAYER_OUTSIDE_SPEEDUP * delta * max(0.1, FIRST_PLAYER_FOLLOW_SPEED - first_edge_dist / 200) * (progress[first] - $"..".progress)
-			$shader.global_position = get_screen_center_position()
-			$shader.material.set_shader_parameter("offset", get_screen_center_position() * CAUSTIC_OFFSET_SCALE)
+func move_towards_target(delta: float) -> void:
+	var first_edge_dist = distance_to_edge(players.get_node(first).global_position)
+	global_position += zoom.x * delta * max(0.1, FIRST_PLAYER_FOLLOW_SPEED - first_edge_dist / 200) * (target.global_position - global_position)
+	if first_edge_dist < FIRST_PLAYER_MIN_DIST:
+		global_position += zoom.x * FIRST_PLAYER_FOLLOW_SPEED * delta * max(0.1, FIRST_PLAYER_FOLLOW_SPEED - first_edge_dist / 200) * (target.global_position - global_position)
 
 func distance_to_edge(position: Vector2) -> float:
 	var distance_to_top = position.y - (get_screen_center_position().y - get_viewport_rect().size.y / 2)
@@ -77,7 +78,12 @@ func distance_to_edge(position: Vector2) -> float:
 func first_player(progress: Dictionary) -> String:
 	var best_player_name = null
 	for player_name in progress:
-		if not best_player_name or progress[player_name] > progress[best_player_name]:
+		if not best_player_name == null:
+			var best_laps = get_parent().get_parent().get_node("players/" + best_player_name).laps
+			var cur_laps = get_parent().get_parent().get_node("players/" + player_name).laps
+			if not best_player_name or cur_laps > best_laps or (cur_laps == best_laps and progress[player_name] > progress[best_player_name]):
+				best_player_name = player_name
+		else:
 			best_player_name = player_name
 	
 	return best_player_name
