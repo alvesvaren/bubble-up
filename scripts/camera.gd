@@ -17,7 +17,7 @@ func _ready() -> void:
 
 func state_change(state) -> void:
 	if state == Manager.BEFORE:
-		$RichTextLabel.visible = false
+		$EndScreen.visible = false
 
 func process_after(delta) -> void:
 	for joypad in Input.get_connected_joypads():
@@ -28,7 +28,7 @@ func process_after(delta) -> void:
 
 func process_during(delta: float) -> void:
 	if players.get_child_count() == 1:
-		$RichTextLabel.visible = true
+		$EndScreen.visible = true
 		Manager.set_state.emit(Manager.AFTER)
 
 func _process(delta: float) -> void:

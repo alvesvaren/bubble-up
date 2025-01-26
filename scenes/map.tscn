@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=4 uid="uid://d12u3wfklhtjd"]
+[gd_scene load_steps=8 format=4 uid="uid://d12u3wfklhtjd"]
 
 [ext_resource type="TileSet" uid="uid://u6jihf0e3jyi" path="res://img/tileset.tres" id="1_2bbjh"]
 [ext_resource type="PackedScene" uid="uid://dr5lyvg3o4q2c" path="res://scenes/wall.tscn" id="2_qx2qk"]
 [ext_resource type="PackedScene" uid="uid://d1jvxhgsevlub" path="res://scenes/bubble.tscn" id="3_whuoy"]
+[ext_resource type="Texture2D" uid="uid://dhctxiaktfojn" path="res://img/end screen.aseprite" id="6_cbsbu"]
 [ext_resource type="PackedScene" uid="uid://dqcd3dx5oqh68" path="res://scenes/powerup.tscn" id="6_erodb"]
 [ext_resource type="PackedScene" uid="uid://dxv8kn10275wu" path="res://scenes/camera.tscn" id="6_qi01l"]
 
@@ -68,19 +69,6 @@ rotates = false
 
 [node name="Camera2D" parent="CameraPath/PathFollow2D" instance=ExtResource("6_qi01l")]
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CameraPath/PathFollow2D/Camera2D"]
+[node name="EndScreen" type="Sprite2D" parent="CameraPath/PathFollow2D/Camera2D"]
 visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -342.0
-offset_top = -71.4462
-offset_right = 356.0
-offset_bottom = 73.5538
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 50
-text = "WINNER!!!
-press start/enter to restart"
+texture = ExtResource("6_cbsbu")

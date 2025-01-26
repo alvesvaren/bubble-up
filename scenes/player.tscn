@@ -56,14 +56,14 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0sk8y"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uut31"]
 resource_local_to_scene = true
 shader = ExtResource("4_cqnsm")
 shader_parameter/hue_shift = 0.605
 shader_parameter/sat_mul = 1.0
 shader_parameter/val_mul = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ybly4"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y4wlv"]
 resource_local_to_scene = true
 shader = ExtResource("4_cqnsm")
 shader_parameter/hue_shift = 0.605
@@ -92,7 +92,7 @@ flip_h = true
 
 [node name="2" parent="sprites" instance=ExtResource("3_7kr7p")]
 visible = false
-material = SubResource("ShaderMaterial_0sk8y")
+material = SubResource("ShaderMaterial_uut31")
 flip_h = true
 
 [node name="timer" type="Timer" parent="."]
@@ -100,7 +100,7 @@ one_shot = true
 
 [node name="bubble" parent="." instance=ExtResource("6_j0i7h")]
 visible = false
-material = SubResource("ShaderMaterial_ybly4")
+material = SubResource("ShaderMaterial_y4wlv")
 position = Vector2(-32, 0)
 
 [node name="shield" type="Sprite2D" parent="."]

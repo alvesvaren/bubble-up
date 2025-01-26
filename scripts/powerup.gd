@@ -16,4 +16,11 @@ func _on_body_entered(body: Player) -> void:
 		get_parent().add_child(bubble_up_sound.instantiate())
 		$"stjärna aseprite".play("burst")
 		await $"stjärna aseprite".animation_finished
-		queue_free()
+		visible = false
+		$Timer.start()
+
+
+func _on_timer_timeout() -> void:
+	visible = true
+	$"stjärna aseprite".play("shimmer")
+	active = true
