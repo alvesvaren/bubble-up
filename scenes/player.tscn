@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_yq23o"]
 [ext_resource type="PackedScene" uid="uid://d1jvxhgsevlub" path="res://scenes/bubble.tscn" id="2_632id"]
-[ext_resource type="Material" uid="uid://bojfk8j2wh66i" path="res://shaders/player.tres" id="2_i1wvi"]
+[ext_resource type="Material" path="res://shaders/player.tres" id="2_i1wvi"]
 [ext_resource type="PackedScene" uid="uid://do7s4w8af10dm" path="res://img/fish2.aseprite" id="3_7kr7p"]
 [ext_resource type="Shader" path="res://shaders/hsv-shader.gdshader" id="4_cqnsm"]
 [ext_resource type="PackedScene" uid="uid://clvycomtapab6" path="res://img/bubble.aseprite" id="6_j0i7h"]
@@ -56,14 +56,14 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tx3er"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w8p1o"]
 resource_local_to_scene = true
 shader = ExtResource("4_cqnsm")
 shader_parameter/hue_shift = 0.605
 shader_parameter/sat_mul = 1.0
 shader_parameter/val_mul = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gqmn4"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0qx4e"]
 resource_local_to_scene = true
 shader = ExtResource("4_cqnsm")
 shader_parameter/hue_shift = 0.605
@@ -92,7 +92,7 @@ flip_h = true
 
 [node name="2" parent="sprites" instance=ExtResource("3_7kr7p")]
 visible = false
-material = SubResource("ShaderMaterial_tx3er")
+material = SubResource("ShaderMaterial_w8p1o")
 flip_h = true
 
 [node name="timer" type="Timer" parent="."]
@@ -100,7 +100,7 @@ one_shot = true
 
 [node name="bubble" parent="." instance=ExtResource("6_j0i7h")]
 visible = false
-material = SubResource("ShaderMaterial_gqmn4")
+material = SubResource("ShaderMaterial_0qx4e")
 position = Vector2(-32, 0)
 
 [node name="shield" type="Sprite2D" parent="."]
