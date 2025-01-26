@@ -12,6 +12,7 @@ var laps = 0
 @export var player_index: int
 @export var flap_curve: Curve
 @export var bubble_scene: PackedScene
+@export var spnge_bounce: PackedScene
 
 var last_flap_was_right = false
 var last_flap_time = 0
@@ -100,6 +101,7 @@ func _physics_process(delta: float) -> void:
 		var layers = PhysicsServer2D.body_get_collision_layer(collision.get_collider_rid())
 		if layers & (1 << 3):
 			velocity = (velocity.bounce(collision.get_normal())) * 2 + (velocity.bounce(collision.get_normal()).normalized() * 50)
+			get_parent().get_parent().add_child(spnge_bounce.instantiate())
 	move_and_slide()
 
 

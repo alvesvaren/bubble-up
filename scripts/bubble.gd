@@ -3,7 +3,7 @@ extends Area2D
 var active = true;
 var player = null;
 var vel = 0;
-@onready var pos = global_position
+var pos = null
 
 const FLOAT_ACC = -100;
 @export var pop_sound: PackedScene
@@ -24,6 +24,8 @@ func _physics_process(delta: float) -> void:
 		player.global_position = global_position
 		vel += FLOAT_ACC * delta
 		global_position.y += delta * vel
+	if active:
+		pos = global_position
 
 
 func burst() -> void:

@@ -2,13 +2,13 @@
 
 importer="Aseprite AnimatedSprite2D"
 type="PackedScene"
-uid="uid://bn02h47yjgd2d"
-path="res://.godot/imported/Press A to join.aseprite-edfed7e5bba9126769b5dad0541fdff2.scn"
+uid="uid://cnhnhpqsygy0c"
+path="res://.godot/imported/BUBBLE UP!.aseprite-ecf3b129b82d94d11175c2ad3bff7a02.scn"
 
 [deps]
 
-source_file="res://img/Press A to join.aseprite"
-dest_files=["res://.godot/imported/Press A to join.aseprite-edfed7e5bba9126769b5dad0541fdff2.scn"]
+source_file="res://img/BUBBLE UP!.aseprite"
+dest_files=["res://.godot/imported/BUBBLE UP!.aseprite-ecf3b129b82d94d11175c2ad3bff7a02.scn"]
 
 [params]
 

@@ -2,13 +2,13 @@
 
 importer="Aseprite AnimatedSprite2D"
 type="PackedScene"
-uid="uid://bn02h47yjgd2d"
-path="res://.godot/imported/Press A to join.aseprite-edfed7e5bba9126769b5dad0541fdff2.scn"
+uid="uid://bf0mw307eg24q"
+path="res://.godot/imported/countdown från 3.aseprite-5d98fc46aaba7b34beaf00fd65381ec8.scn"
 
 [deps]
 
-source_file="res://img/Press A to join.aseprite"
-dest_files=["res://.godot/imported/Press A to join.aseprite-edfed7e5bba9126769b5dad0541fdff2.scn"]
+source_file="res://img/countdown från 3.aseprite"
+dest_files=["res://.godot/imported/countdown från 3.aseprite-5d98fc46aaba7b34beaf00fd65381ec8.scn"]
 
 [params]
 

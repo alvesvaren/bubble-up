@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bts46ku67ks5n"]
+
+[ext_resource type="Script" path="res://scripts/bubble_up_text.gd" id="1_appqq"]
+[ext_resource type="PackedScene" uid="uid://cnhnhpqsygy0c" path="res://img/BUBBLE UP!.aseprite" id="2_wtic4"]
+
+[node name="BubbleUpText" type="Node2D"]
+script = ExtResource("1_appqq")
+
+[node name="BUBBLE UP!" parent="." instance=ExtResource("2_wtic4")]
+autoplay = "bubble"
+frame = 5
+frame_progress = 1.0
+
+[connection signal="animation_finished" from="BUBBLE UP!" to="." method="_on_bubble_up_animation_finished"]

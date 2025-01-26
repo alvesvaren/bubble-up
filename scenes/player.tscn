@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=4 uid="uid://dg6f078aut376"]
+[gd_scene load_steps=19 format=4 uid="uid://dg6f078aut376"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_yq23o"]
 [ext_resource type="PackedScene" uid="uid://d1jvxhgsevlub" path="res://scenes/bubble.tscn" id="2_632id"]
 [ext_resource type="Material" uid="uid://bojfk8j2wh66i" path="res://shaders/player.tres" id="2_i1wvi"]
 [ext_resource type="PackedScene" uid="uid://do7s4w8af10dm" path="res://img/fish2.aseprite" id="3_7kr7p"]
+[ext_resource type="PackedScene" uid="uid://ba52qlhmie3re" path="res://sounds/spnge.tscn" id="3_k8jm4"]
 [ext_resource type="Shader" path="res://shaders/hsv-shader.gdshader" id="4_cqnsm"]
 [ext_resource type="PackedScene" uid="uid://clvycomtapab6" path="res://img/bubble.aseprite" id="6_j0i7h"]
 [ext_resource type="Texture2D" uid="uid://djcu8f03x4h8v" path="res://img/icon.svg" id="7_khm5f"]
@@ -75,6 +76,7 @@ collision_mask = 2
 script = ExtResource("1_yq23o")
 flap_curve = SubResource("Curve_xi0xo")
 bubble_scene = ExtResource("2_632id")
+spnge_bounce = ExtResource("3_k8jm4")
 
 [node name="collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_p0rjk")

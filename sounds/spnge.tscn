@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ba52qlhmie3re"]
+
+[ext_resource type="AudioStream" uid="uid://cpw8kxm7y64pg" path="res://sounds/spnge_bounce.ogg" id="1_irfb8"]
+
+[node name="Spnge" type="AudioStreamPlayer"]
+stream = ExtResource("1_irfb8")
+autoplay = true

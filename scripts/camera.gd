@@ -26,7 +26,9 @@ func _ready() -> void:
 func state_change(state) -> void:
 	if state == Manager.BEFORE:
 		$EndScreen.visible = false
+		get_parent().get_node("Press A to join").visible = true
 	if state == Manager.DURING:
+		get_parent().get_node("Press A to join").visible = false
 		start_time = Time.get_ticks_msec()
 
 func process_after(delta) -> void:
