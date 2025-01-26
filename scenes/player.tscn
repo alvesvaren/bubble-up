@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://dg6f078aut376"]
+[gd_scene load_steps=20 format=4 uid="uid://dg6f078aut376"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_yq23o"]
 [ext_resource type="PackedScene" uid="uid://d1jvxhgsevlub" path="res://scenes/bubble.tscn" id="2_632id"]
@@ -7,7 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://ba52qlhmie3re" path="res://sounds/spnge.tscn" id="3_k8jm4"]
 [ext_resource type="Shader" path="res://shaders/hsv-shader.gdshader" id="4_cqnsm"]
 [ext_resource type="PackedScene" uid="uid://clvycomtapab6" path="res://img/bubble.aseprite" id="6_j0i7h"]
-[ext_resource type="Texture2D" uid="uid://djcu8f03x4h8v" path="res://img/icon.svg" id="7_khm5f"]
+[ext_resource type="Texture2D" uid="uid://cc18ocx8mdvkr" path="res://img/liten rosa bubbla.aseprite" id="8_etoc5"]
+[ext_resource type="Texture2D" uid="uid://ckks6mq8dlf1e" path="res://img/blixt bubbla.aseprite" id="9_vtswe"]
 
 [sub_resource type="Curve" id="Curve_xi0xo"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.371316, 0.995266), 0.0, -2.0, 0, 0, Vector2(1, 0.197802), 0.0, 0.0, 0, 0]
@@ -105,11 +106,18 @@ visible = false
 material = SubResource("ShaderMaterial_tm43p")
 position = Vector2(-32, 0)
 
-[node name="shield" type="Sprite2D" parent="."]
+[node name="shield" parent="." instance=ExtResource("6_j0i7h")]
 visible = false
-position = Vector2(-11, 8)
-scale = Vector2(0.09375, 0.09375)
-texture = ExtResource("7_khm5f")
+
+[node name="shieldItem" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-14, 11)
+texture = ExtResource("8_etoc5")
+
+[node name="speedItem" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-14, 11)
+texture = ExtResource("9_vtswe")
 
 [node name="ShieldTimer" type="Timer" parent="."]
 wait_time = 8.0

@@ -111,7 +111,10 @@ func _process(delta: float) -> void:
 	$bubble.visible = collected_bu == BubbleUp.BU.BUBBLE
 	$shield.visible = shield_active
 	
-	if collected_bu and (player_index < 0 and Input.is_action_just_pressed("kb_p" + str(- player_index) + "_use")) or (player_index >= 0 and Input.is_joy_button_pressed(player_index, JOY_BUTTON_RIGHT_SHOULDER)):
+	var bool1 = (player_index < 0 and Input.is_action_just_pressed("kb_p" + str(- player_index) + "_use"))
+	var bool2 = (player_index >= 0 and Input.is_joy_button_pressed(player_index, JOY_BUTTON_RIGHT_SHOULDER))
+	
+	if collected_bu != null and (bool1 or bool2):
 		match collected_bu:
 			BubbleUp.BU.BUBBLE:
 				var new_bubble = bubble_scene.instantiate()
@@ -122,6 +125,15 @@ func _process(delta: float) -> void:
 			BubbleUp.BU.SHIELD:
 				start_shield()
 		collected_bu = null
+	if collected_bu != null:
+		match collected_bu:
+			BubbleUp.BU.SHIELD:
+				$shieldItem.visible = true
+			BubbleUp.BU.SPEED:
+				$speedItem.visible = true
+	else:
+		$shieldItem.visible = false
+		$speedItem.visible = false
 	var current = get_flap_axis()
 	
 	var angle_difference = rotation - velocity.angle()
