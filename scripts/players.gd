@@ -21,6 +21,8 @@ func countdown():
 	$"../music".stop()
 	$"../music/intro2".stop()
 	$"../music/countdown".play()
+	$"../map/Camera2D/countdown från 3".visible = true
+	$"../map/Camera2D/countdown från 3".play("count")
 
 func join_player(id) -> void:
 	print("Player ", id, " joined")

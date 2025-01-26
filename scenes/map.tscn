@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://d12u3wfklhtjd"]
+[gd_scene load_steps=12 format=4 uid="uid://d12u3wfklhtjd"]
 
 [ext_resource type="TileSet" uid="uid://u6jihf0e3jyi" path="res://img/tileset.tres" id="1_2bbjh"]
 [ext_resource type="PackedScene" uid="uid://dr5lyvg3o4q2c" path="res://scenes/wall.tscn" id="2_qx2qk"]
@@ -6,8 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://dhctxiaktfojn" path="res://img/end screen.aseprite" id="6_cbsbu"]
 [ext_resource type="PackedScene" uid="uid://dqcd3dx5oqh68" path="res://scenes/powerup.tscn" id="6_erodb"]
 [ext_resource type="PackedScene" uid="uid://dxv8kn10275wu" path="res://scenes/camera.tscn" id="6_qi01l"]
+[ext_resource type="PackedScene" uid="uid://bf0mw307eg24q" path="res://img/countdown från 3.aseprite" id="7_a5xtn"]
 [ext_resource type="PackedScene" uid="uid://bn02h47yjgd2d" path="res://img/Press A to join.aseprite" id="7_kphpm"]
 [ext_resource type="PackedScene" uid="uid://ch2ldfeuegri3" path="res://scenes/stream.tscn" id="8_l6fkf"]
+[ext_resource type="Script" path="res://scripts/countdown_från_3.gd" id="8_w8hho"]
 
 [sub_resource type="Curve2D" id="Curve2D_g64cm"]
 _data = {
@@ -123,6 +125,10 @@ visible = false
 z_index = 2
 texture = ExtResource("6_cbsbu")
 
+[node name="countdown från 3" parent="Camera2D" instance=ExtResource("7_a5xtn")]
+visible = false
+script = ExtResource("8_w8hho")
+
 [node name="CameraPath" type="Path2D" parent="."]
 position = Vector2(0, -6.97882)
 scale = Vector2(1, 1.00706)
@@ -145,3 +151,5 @@ rotation = 0.978518
 position = Vector2(-262, -272)
 rotation = 1.06673
 stream_speed = 50
+
+[connection signal="animation_finished" from="Camera2D/countdown från 3" to="Camera2D/countdown från 3" method="_on_animation_finished"]
