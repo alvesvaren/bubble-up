@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://d12u3wfklhtjd"]
+[gd_scene load_steps=10 format=4 uid="uid://d12u3wfklhtjd"]
 
 [ext_resource type="TileSet" uid="uid://u6jihf0e3jyi" path="res://img/tileset.tres" id="1_2bbjh"]
 [ext_resource type="PackedScene" uid="uid://dr5lyvg3o4q2c" path="res://scenes/wall.tscn" id="2_qx2qk"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dhctxiaktfojn" path="res://img/end screen.aseprite" id="6_cbsbu"]
 [ext_resource type="PackedScene" uid="uid://dqcd3dx5oqh68" path="res://scenes/powerup.tscn" id="6_erodb"]
 [ext_resource type="PackedScene" uid="uid://dxv8kn10275wu" path="res://scenes/camera.tscn" id="6_qi01l"]
+[ext_resource type="PackedScene" uid="uid://ch2ldfeuegri3" path="res://scenes/stream.tscn" id="7_kjrej"]
+[ext_resource type="PackedScene" uid="uid://vyovjqteysgi" path="res://scenes/lap.tscn" id="8_dbio6"]
 
 [sub_resource type="Curve2D" id="Curve2D_g64cm"]
 _data = {
@@ -78,3 +80,10 @@ position = Vector2(1, -3)
 rotates = false
 
 [node name="CameraTarget" type="Node2D" parent="CameraPath/PathFollow2D"]
+
+[node name="Stream" parent="." instance=ExtResource("7_kjrej")]
+position = Vector2(811, 37)
+rotation = 0.466587
+
+[node name="Lap" parent="." instance=ExtResource("8_dbio6")]
+position = Vector2(906, 34)

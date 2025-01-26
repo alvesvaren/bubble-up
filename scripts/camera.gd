@@ -55,7 +55,6 @@ func _process(delta: float) -> void:
 		for child in players.get_children():
 			if (distance_to_edge(child.global_position) < 0) and first != child.name:
 				child.death.emit()
-		print(first, progresses[first], target.global_position)
 		target.get_parent().progress = progresses[first]
 		$shader.global_position = get_screen_center_position()
 		$shader.material.set_shader_parameter("offset", get_screen_center_position() * CAUSTIC_OFFSET_SCALE)
