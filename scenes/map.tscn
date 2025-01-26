@@ -21,7 +21,8 @@ tile_map_data = PackedByteArray("AADh/+L/AAABAAIAAADi/+L/AAABAAIAAADj/8D/AAABAAE
 tile_set = ExtResource("1_2bbjh")
 
 [node name="Wall" parent="." instance=ExtResource("2_qx2qk")]
-position = Vector2(149, -29)
+position = Vector2(149, -43)
+scale = Vector2(0.826478, 0.826478)
 
 [node name="bubbles" type="Node2D" parent="."]
 
