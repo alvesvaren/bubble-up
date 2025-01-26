@@ -7,6 +7,7 @@ const DRAG = 0.004
 const STEER_FACTOR = 0.001
 
 var speed_multiplier = 1.0
+var laps = 0
 
 @export var player_index: int
 @export var flap_curve: Curve
